@@ -24,6 +24,15 @@ public class Customer {
 	@NotEmpty
 	private String gender;
 
+	public Customer() {
+    }
+
+	public Customer(String name, String email, String gender) {
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+    }
+
 	public Long getId() {
 		return id;
 	}
