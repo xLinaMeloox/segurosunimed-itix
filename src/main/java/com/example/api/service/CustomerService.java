@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-
 import com.example.api.domain.Customer;
 import com.example.api.repository.CustomerRepository;
 
@@ -31,11 +29,15 @@ public class CustomerService {
 	}
 
 	public Customer create(Customer customer) {
-		Customer newCustomer = new Customer();
-		newCustomer.setName(customer.getName());
-		newCustomer.setEmail(customer.getEmail());
-		newCustomer.setGender(customer.getGender());
-		return repository.save(newCustomer);
+		if (!ObjectUtils.isEmpty(customer)) {
+			Customer newCustomer = new Customer();
+			newCustomer.setName(customer.getName());
+			newCustomer.setEmail(customer.getEmail());
+			newCustomer.setGender(customer.getGender());
+			return repository.save(newCustomer);
+		} else {
+		   throw new EntityNotFoundException("Customer not null");
+		}
 	}
 
 	public Customer update(Customer customer) {
@@ -51,9 +53,6 @@ public class CustomerService {
 		   throw new EntityNotFoundException("Customer id not found");
 		}
 	}
-
-
-	
 	public void deleteById(Long id) {
 	  var existsById = repository.findById(id);
         if (!ObjectUtils.isEmpty(existsById)) {
@@ -62,4 +61,6 @@ public class CustomerService {
             throw new EntityNotFoundException("Customer id not found");
         }
 	}
+	
+
 }

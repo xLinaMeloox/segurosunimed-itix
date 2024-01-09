@@ -19,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 import com.example.api.domain.Customer;
+import com.example.api.domain.model.CustomerFilter;
 import com.example.api.service.CustomerService;
 
 @RestController
